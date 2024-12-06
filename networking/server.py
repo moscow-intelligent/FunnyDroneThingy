@@ -37,7 +37,7 @@ async def handler(websocket, path):
 
 async def main():
     """Start the WebSocket server."""
-    async with websockets.serve(handler, "localhost", 8765):
+    async with websockets.serve(handler, "0.0.0.0", 8765):
         await asyncio.Future()  # Run forever
 
 if __name__ == "__main__":

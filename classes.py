@@ -85,7 +85,7 @@ class Entity(Sprite):
 
 class PlayerDraw(Entity):
     def __init__(self, x, y, name):
-        super().__init__(x, y, 'entities/active_provider.png')
+        super().__init__(x, y, 'entities/drone.png')
         self.name = name
         self.font = font.SysFont('Arial', 30)
 

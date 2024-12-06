@@ -40,7 +40,7 @@ def main():
     global circle_x, circle_y
     clock = pygame.time.Clock()
     # NETWORK
-    net = GameClient("ws://localhost:8765")
+    net = GameClient("ws://10.144.51.56:8765")
     net.run()
     # Create a grid of rectangles (12 rows x 16 columns)
     rectangles = create_rectangles(12, 16)
@@ -84,8 +84,8 @@ def main():
         for e in entities:
             e.draw(screen, camera_x, camera_y)
         # Draw the circle at the center of the screen
-
-        pygame.draw.circle(screen, BLUE, (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2), CIRCLE_RADIUS)
+        pd = PlayerDraw(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2, my_name)
+        #pygame.draw.circle(screen, BLUE, (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2), CIRCLE_RADIUS)
 
         # Render the coordinates
         coordinates_text = f"Coordinates: ({p.x}, {p.y})"
