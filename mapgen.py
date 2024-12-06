@@ -5,19 +5,18 @@ RECT_SIZE = 128
 
 # Определение биомов с использованием существующих тайлов
 BIOMES = {
-    'forest': [Tiles.GRASS, Tiles.WATER],
-    'desert': [Tiles.HAZARD_CONCRETE],
-    'swamp': [Tiles.WATER, Tiles.CONCRETE],
-    'plain': [Tiles.GRASS, Tiles.GRASS],
-    'mountain': [Tiles.WATER, Tiles.WATER],
-
+    'navis': [Tiles.NAVIS_GRASS, Tiles.NAVIS_CONCRETE, Tiles.NAVIS_HAZARD_CONCRETE, Tiles.WATER, Tiles.NAVIS_SAND],
+    'vulcanus': [Tiles.VULCANUS_LAVA, Tiles.VULCANUS_VOLCANIC_SOIL, Tiles.VULCANUS_VOLCANIC],
+    'fulgora': [Tiles.FULGORA_MACHINE, Tiles.FULGORA_SOIL],
+    'gleba': [Tiles.GLEBA_MOLD,Tiles.GLEBA_MOLD2,Tiles.GLEBA_MOLD3, Tiles.WATER],
+    'akilo': [Tiles.AKILO_DUST, Tiles.AKILO_DUST2, Tiles.AKILO_ICE, Tiles.WATER]
 }
 
 def generate_biome(x, y, biome_type):
     """Генерирует тайлы для указанного биома."""
     tiles = []
     # Генерируем тайлы для указанного биома
-    for _ in range(5):  # Генерируем 5 тайлов для каждого биома
+    for _ in range(10):  # Генерируем 5 тайлов для каждого биома
         tile_type = random.choice(BIOMES[biome_type])
         tile = Tile(x, y, tile_type)
         tiles.append(tile)

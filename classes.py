@@ -6,10 +6,22 @@ from enum import Enum
 
 
 class Tiles(Enum):
-    WATER = 2
-    CONCRETE = 3
-    GRASS = 4
-    HAZARD_CONCRETE = 5
+    WATER = 1
+    NAVIS_GRASS = 2
+    NAVIS_CONCRETE = 3
+    NAVIS_HAZARD_CONCRETE = 4
+    NAVIS_SAND = 5
+    VULCANUS_LAVA = 6
+    VULCANUS_VOLCANIC_SOIL = 7
+    VULCANUS_VOLCANIC = 8
+    FULGORA_MACHINE = 9
+    FULGORA_SOIL = 10
+    GLEBA_MOLD = 11
+    GLEBA_MOLD2 = 12
+    GLEBA_MOLD3 = 13
+    AKILO_DUST = 14
+    AKILO_DUST2 = 15
+    AKILO_ICE = 16
 
 class Tile(Rect):
     def __init__(self, x: int, y: int, tile_type: Tiles):
@@ -53,7 +65,7 @@ class Player():
 class World:
     def __init__(self):
         """Initialize the world with a grid of tiles."""
-        self.tiles = [Tile(10, 10, Tiles.CONCRETE)]
+        ...
 
 
 class Entity(Sprite):
@@ -75,8 +87,23 @@ class TestEntity(Entity):
 
 
 def get_tile_path(t: Tiles):
-    return {Tiles.WATER:'map_tiles/water.png',
-            Tiles.HAZARD_CONCRETE:'map_tiles/hazard_concrete.png',
-            Tiles.CONCRETE:'map_tiles/concrete.png',
-            Tiles.GRASS:'map_tiles/grass.png',
-        }[t]
+    return {
+        Tiles.WATER:'map_tiles/water.png',
+        Tiles.NAVIS_GRASS:'map_tiles/navis_grass.png',
+        Tiles.NAVIS_CONCRETE:'map_tiles/navis_concrete.png',
+        Tiles.NAVIS_HAZARD_CONCRETE:'map_tiles/navis_hazard_concrete.png',
+        Tiles.NAVIS_SAND:'map_tiles/navis_sand.png',
+        Tiles.VULCANUS_LAVA:'map_tiles/vulcanus_lava.png',
+        Tiles.VULCANUS_VOLCANIC_SOIL:'map_tiles/vulcanus_volcanic_soil.png',
+        Tiles.VULCANUS_VOLCANIC:'map_tiles/vulcanus_volcanic.png',
+        Tiles.FULGORA_MACHINE:'map_tiles/fulgora_machine.png',
+        Tiles.FULGORA_SOIL:'map_tiles/fulgora_soil.png',
+        Tiles.GLEBA_MOLD:'map_tiles/gleba_mold.png',
+        Tiles.GLEBA_MOLD2:'map_tiles/gleba_mold2.png',
+        Tiles.GLEBA_MOLD3:'map_tiles/gleba_mold3.png',
+        Tiles.AKILO_DUST:'map_tiles/akilo_dust.png',
+        Tiles.AKILO_DUST2:'map_tiles/akilo_dust2.png',
+        Tiles.AKILO_ICE:'map_tiles/akilo_ice.png',
+    }[t]
+
+
