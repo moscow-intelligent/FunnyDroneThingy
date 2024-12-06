@@ -17,7 +17,7 @@ class Tile(Rect):
         self.y = y
         self.tile_type = type
         self.image = image.load(get_tile_path(tile_type)).convert()
-        self.rect = self.image.get_rect(topleft=(x, y))  # Get the rectangle for positioning
+        self.rect = self.image.get_rect(topleft=(x, y))
 
     def draw(self, surface):
         surface.blit(self.image, self.rect)
@@ -63,12 +63,18 @@ class World:
     #
 
 class Entity(Rect):
-    def __init__(self, x: int, y: int, x_size: int = 10, y_size: int = 10):
+    def __init__(self, x: int, y: int, image_path: str, x_size: int = 64, y_size: int = 64):
         super().__init__(x, y, x_size, y_size)
+        self.image = image.load("entities/test.png").convert()
+        self.image = transform.scale(self.image, (64, 64))
+        self.rect = self.image.get_rect(topleft=(x, y))
 
-class Chest(Entity):
+    def draw(self, surface):
+        surface.blit(self.image, self.rect)
+
+class TestEntity(Entity):
     def __init__(self, x, y):
-        super().__init__(x, y, 10, 10)
+        super().__init__(x, y, '123', 10, 10)
 
 def get_tile_path(t: Tiles):
     return {Tiles.WATER:'map_tiles/water.png',

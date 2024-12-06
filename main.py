@@ -1,6 +1,6 @@
 import pygame
 import sys
-from classes import World, Tile, Tiles, Player
+from classes import World, Tile, Tiles, Player, TestEntity
 from mapgen import generate_map
 
 pygame.init()
@@ -48,9 +48,9 @@ def main():
     font = pygame.font.Font(None, 36)
     w = World()
     p = Player(0, 0, 10)
-    map = generate_map(10000)
+    map = generate_map(1000)
     w.tiles = map
-    print(len(map))
+    ent = TestEntity(100, 100)
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -74,6 +74,8 @@ def main():
         for t in w.tiles:
             t.rect = t.move(-camera_x, -camera_y)
             t.draw(screen)
+        ent.rect = ent.move(-camera_x, -camera_y)
+        ent.draw(screen)
         # Draw the circle at the center of the screen
         pygame.draw.circle(screen, BLUE, (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2), CIRCLE_RADIUS)
 
