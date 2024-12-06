@@ -1,6 +1,6 @@
 import pygame
 import sys
-
+from classes import World, Tile, Tiles
 # Initialize Pygame
 pygame.init()
 
@@ -45,7 +45,7 @@ def main():
 
     # Set up font for displaying coordinates
     font = pygame.font.Font(None, 36)
-
+    w = World()
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -71,11 +71,15 @@ def main():
         camera_y = circle_y - SCREEN_HEIGHT // 2
 
         # Draw rectangles with camera offset
+
         for rect in rectangles:
             # Offset the rectangle's position based on the camera
             offset_rect = rect.move(-camera_x, -camera_y)
             pygame.draw.rect(screen, GREEN, offset_rect)
 
+        for t in w.tiles:
+            t.rect = t.move(-camera_x, -camera_y)
+            t.draw(screen)
         # Draw the circle at the center of the screen
         pygame.draw.circle(screen, BLUE, (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2), CIRCLE_RADIUS)
 
