@@ -1,5 +1,6 @@
 from typing import Self
 from pygame import Rect, image, transform, K_RIGHT, K_LEFT, K_UP, K_DOWN
+from pygame.sprite import Sprite
 from math import sqrt
 from enum import Enum
 
@@ -54,27 +55,24 @@ class World:
         """Initialize the world with a grid of tiles."""
         self.tiles = [Tile(10, 10, Tiles.CONCRETE)]
 
-    # def draw(self, surface):
-    #     """Draw all tiles in the world on the given surface."""
-    #     for row in self.tiles:
-    #         for tile in row:
-    #             tile.draw(surface)
-    #
-    #
 
-class Entity(Rect):
+class Entity(Sprite):
     def __init__(self, x: int, y: int, image_path: str, x_size: int = 64, y_size: int = 64):
-        super().__init__(x, y, x_size, y_size)
+        super().__init__()
         self.image = image.load("entities/test.png").convert()
         self.image = transform.scale(self.image, (64, 64))
-        self.rect = self.image.get_rect(topleft=(x, y))
+        self.rect = self.image.get_rect()
+        self.rect.x, self.rect.y = x, y
 
-    def draw(self, surface):
-        surface.blit(self.image, self.rect)
+    def draw(self, surface, cx: int, cy: int):
+        surface.blit(self.image, self.rect.move(-cx, -cy))
 
 class TestEntity(Entity):
     def __init__(self, x, y):
-        super().__init__(x, y, '123', 10, 10)
+        super().__init__(x, y, '123')
+
+
+
 
 def get_tile_path(t: Tiles):
     return {Tiles.WATER:'map_tiles/water.png',

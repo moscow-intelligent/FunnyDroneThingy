@@ -6,8 +6,8 @@ from mapgen import generate_map
 pygame.init()
 
 # Constants
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 600
+SCREEN_WIDTH = 1080
+SCREEN_HEIGHT = 720
 RECT_SIZE = 50
 CIRCLE_RADIUS = 15
 FPS = 60
@@ -51,6 +51,8 @@ def main():
     map = generate_map(1000)
     w.tiles = map
     ent = TestEntity(100, 100)
+    entities = pygame.sprite.Group()
+    entities.add(ent)
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -74,8 +76,9 @@ def main():
         for t in w.tiles:
             t.rect = t.move(-camera_x, -camera_y)
             t.draw(screen)
-        ent.rect = ent.move(-camera_x, -camera_y)
-        ent.draw(screen)
+
+        for e in entities:
+            e.draw(screen, camera_x, camera_y)
         # Draw the circle at the center of the screen
         pygame.draw.circle(screen, BLUE, (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2), CIRCLE_RADIUS)
 
@@ -87,7 +90,7 @@ def main():
 
         fps_text = font.render(f"FPS: {fps:.2f}", True,BLACK)  # Render the FPS text
 
-        screen.blit(fps_text, (100, 100))  # Draw the FPS text at position (10, 10)
+        screen.blit(fps_text, (10, 100))  # Draw the FPS text at position (10, 10)
 
         # Update the display
         pygame.display.flip()
