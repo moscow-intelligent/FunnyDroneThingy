@@ -33,11 +33,11 @@ class Player():
 
     def move(self, keys):
         # Movement vector
-        move_x = keys[pygame.K_RIGHT] - keys[pygame.K_LEFT]
-        move_y = keys[pygame.K_DOWN] - keys[pygame.K_UP]
+        move_x = keys[K_RIGHT] - keys[K_LEFT]
+        move_y = keys[K_DOWN] - keys[K_UP]
 
         # Calculate the length of the movement vector
-        length = math.sqrt(move_x**2 + move_y**2)
+        length = sqrt(move_x**2 + move_y**2)
 
         # Normalize the vector if it's not zero
         if length != 0:
@@ -47,10 +47,8 @@ class Player():
         # Update position based on speed
         self.x += move_x * self.speed
         self.y += move_y * self.speed
+        self.x, self.y = round(self.x, 2), round(self.y, 2)
 
-    def draw(self, surface):
-        # Draw the character as a rectangle
-        pygame.draw.rect(surface, (0, 0, 255), (self.x, self.y, self.width, self.height))
 
 class World:
     def __init__(self):
@@ -73,5 +71,3 @@ def get_tile_path(t: Tiles):
             Tiles.CONCRETE:'map_tiles/concrete.png',
             Tiles.GRASS:'map_tiles/grass.png',
         }[t]
-
-
