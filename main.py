@@ -15,10 +15,11 @@ FPS = 60
 GREEN = (0, 255, 0)
 WHITE = (255, 255, 255)
 BLUE = (0, 0, 255)
+BLACK = (0, 0, 0)
 
 # Create the screen
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
-pygame.display.set_caption("Topdown 2D Game")
+pygame.display.set_caption("Logistic bot sim UwU")
 
 # Circle position
 circle_x = SCREEN_WIDTH // 2
@@ -42,6 +43,9 @@ def main():
     # Create a grid of rectangles (12 rows x 16 columns)
     rectangles = create_rectangles(12, 16)
 
+    # Set up font for displaying coordinates
+    font = pygame.font.Font(None, 36)
+
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -62,12 +66,23 @@ def main():
         # Fill the screen with white
         screen.fill(WHITE)
 
-        # Draw rectangles
-        for rect in rectangles:
-            pygame.draw.rect(screen, GREEN, rect)
+        # Calculate the camera offset
+        camera_x = circle_x - SCREEN_WIDTH // 2
+        camera_y = circle_y - SCREEN_HEIGHT // 2
 
-        # Draw the circle
-        pygame.draw.circle(screen, BLUE, (circle_x, circle_y), CIRCLE_RADIUS)
+        # Draw rectangles with camera offset
+        for rect in rectangles:
+            # Offset the rectangle's position based on the camera
+            offset_rect = rect.move(-camera_x, -camera_y)
+            pygame.draw.rect(screen, GREEN, offset_rect)
+
+        # Draw the circle at the center of the screen
+        pygame.draw.circle(screen, BLUE, (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2), CIRCLE_RADIUS)
+
+        # Render the coordinates
+        coordinates_text = f"Coordinates: ({circle_x}, {circle_y})"
+        text_surface = font.render(coordinates_text, True, BLACK)
+        screen.blit(text_surface, (10, 10))  # Draw text at (10, 10)
 
         # Update the display
         pygame.display.flip()
