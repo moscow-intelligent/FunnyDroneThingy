@@ -48,9 +48,9 @@ def main():
     font = pygame.font.Font(None, 36)
     w = World()
     p = Player(0, 0, 10)
-    map = generate_map(1000)
+    map = generate_map(10000)
     w.tiles = map
-    print(map)
+    print(len(map))
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
