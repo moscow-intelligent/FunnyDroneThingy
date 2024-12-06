@@ -16,7 +16,7 @@ class Tile(Rect):
         self.x = x
         self.y = y
         self.tile_type = type
-        self.image = image.load(get_tile_path(tile_type))
+        self.image = image.load(get_tile_path(tile_type)).convert()
         self.rect = self.image.get_rect(topleft=(x, y))  # Get the rectangle for positioning
 
     def draw(self, surface):
