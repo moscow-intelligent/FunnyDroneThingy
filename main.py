@@ -49,7 +49,6 @@ def main():
     w = World()
     p = Player(0, 0, 10)
     map = generate_map(1000)
-    w.tiles = map
     ent = TestEntity(100, 100)
     entities = pygame.sprite.Group()
     entities.add(ent)
@@ -73,9 +72,10 @@ def main():
             offset_rect = rect.move(-camera_x, -camera_y)
             pygame.draw.rect(screen, GREEN, offset_rect)
 
-        for t in w.tiles:
-            t.rect = t.move(-camera_x, -camera_y)
-            t.draw(screen)
+        for m in map:
+            for t in m:
+                t.rect = t.move(-camera_x, -camera_y)
+                t.draw(screen)
 
         for e in entities:
             e.draw(screen, camera_x, camera_y)
