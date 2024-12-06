@@ -1,7 +1,8 @@
 import pygame
 import sys
-from classes import World, Tile, Tiles
-# Initialize Pygame
+from classes import World, Tile, Tiles, Player
+from mapgen import generate_map
+
 pygame.init()
 
 # Constants
@@ -46,32 +47,25 @@ def main():
     # Set up font for displaying coordinates
     font = pygame.font.Font(None, 36)
     w = World()
+    p = Player(0, 0, 10)
+    map = generate_map(50, 50)
+    w.tiles = map
+    print(map)
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
                 sys.exit()
 
-        # Movement
         keys = pygame.key.get_pressed()
-        if keys[pygame.K_LEFT]:
-            circle_x -= 5
-        if keys[pygame.K_RIGHT]:
-            circle_x += 5
-        if keys[pygame.K_UP]:
-            circle_y -= 5
-        if keys[pygame.K_DOWN]:
-            circle_y += 5
-
-        # Fill the screen with white
+        p.move(keys)
         screen.fill(WHITE)
 
-        # Calculate the camera offset
-        camera_x = circle_x - SCREEN_WIDTH // 2
-        camera_y = circle_y - SCREEN_HEIGHT // 2
+        camera_x = p.x - SCREEN_WIDTH // 2
+        camera_y = p.y - SCREEN_HEIGHT // 2
 
         # Draw rectangles with camera offset
-
+        # TEST GREEN RECTANGLES
         for rect in rectangles:
             # Offset the rectangle's position based on the camera
             offset_rect = rect.move(-camera_x, -camera_y)
@@ -84,7 +78,7 @@ def main():
         pygame.draw.circle(screen, BLUE, (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2), CIRCLE_RADIUS)
 
         # Render the coordinates
-        coordinates_text = f"Coordinates: ({circle_x}, {circle_y})"
+        coordinates_text = f"Coordinates: ({p.x}, {p.y})"
         text_surface = font.render(coordinates_text, True, BLACK)
         screen.blit(text_surface, (10, 10))  # Draw text at (10, 10)
 

@@ -5,14 +5,14 @@ from enum import Enum
 
 
 class Tiles(Enum):
-    GROUND = 1
     WATER = 2
     CONCRETE = 3
     GRASS = 4
+    HAZARD_CONCRETE = 5
 
 class Tile(Rect):
     def __init__(self, x: int, y: int, tile_type: Tiles):
-        super().__init__(x, y, 10, 10)
+        super().__init__(x, y, 128, 128)
         self.x = x
         self.y = y
         self.tile_type = type
@@ -63,11 +63,17 @@ class World:
     #
     #
 
+class Entity(Rect):
+    def __init__(self, x: int, y: int, x_size: int = 10, y_size: int = 10):
+        super().__init__(x, y, x_size, y_size)
 
+class Chest(Entity):
+    def __init__(self, x, y):
+        super().__init__(x, y, 10, 10)
 
 def get_tile_path(t: Tiles):
     return {Tiles.WATER:'map_tiles/water.png',
-            Tiles.GROUND:'map_tiles/ground.png',
+            Tiles.HAZARD_CONCRETE:'map_tiles/hazard_concrete.png',
             Tiles.CONCRETE:'map_tiles/concrete.png',
             Tiles.GRASS:'map_tiles/grass.png',
         }[t]
