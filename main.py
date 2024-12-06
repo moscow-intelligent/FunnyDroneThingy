@@ -48,7 +48,7 @@ def main():
     font = pygame.font.Font(None, 36)
     w = World()
     p = Player(0, 0, 10)
-    map = generate_map(50, 50)
+    map = generate_map(1000)
     w.tiles = map
     print(map)
     while True:
@@ -81,6 +81,11 @@ def main():
         coordinates_text = f"Coordinates: ({p.x}, {p.y})"
         text_surface = font.render(coordinates_text, True, BLACK)
         screen.blit(text_surface, (10, 10))  # Draw text at (10, 10)
+        fps = clock.get_fps()  # Get the current FPS
+
+        fps_text = font.render(f"FPS: {fps:.2f}", True,BLACK)  # Render the FPS text
+
+        screen.blit(fps_text, (100, 100))  # Draw the FPS text at position (10, 10)
 
         # Update the display
         pygame.display.flip()
